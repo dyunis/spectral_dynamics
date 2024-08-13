@@ -1,0 +1,35 @@
+program: spectral_dynamics/modular_addition/run.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+method: grid
+project: lmc_svd
+# following hyps in https://arxiv.org/pdf/2206.04817.pdf appendix B
+name: modadd_tfmr_97_slingshot
+metric:
+  name: val/loss
+  goal: minimize
+parameters:
+  seed:
+    values: [0, 1, 2]
+  num_epochs:
+    value: 100_000
+  num_gpus:
+    value: 1
+  batch_size:
+    value: 512
+  use_wandb:
+    value: true
+  lr:
+    value: 1e-3
+  warmup_steps:
+    value: 10
+  lr_schedule:
+    value: 'warmup'
+  weight_decay:
+    value: 0.0
+  prime_number:
+    value: 97
+  data_frac:
+    value: 0.7

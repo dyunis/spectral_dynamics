@@ -1,0 +1,46 @@
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+method: grid
+metric:
+  goal: minimize
+  name: val/loss
+name: imgclass_vgg_cifar10_mask
+parameters:
+  batch_size:
+    value: 128
+  ckpt_path:
+    values:
+    - ./exps/imgclass_vgg_cifar10/imgclass_vgg_cifar10-0/epoch=4-step=1760.ckpt
+    - ./exps/imgclass_vgg_cifar10/imgclass_vgg_cifar10-1/epoch=4-step=1760.ckpt
+    - ./exps/imgclass_vgg_cifar10/imgclass_vgg_cifar10-2/epoch=4-step=1760.ckpt
+  dataset:
+    value: cifar10
+  lr:
+    value: 0.1
+  lr_schedule:
+    value: step
+  model_arch:
+    value: 'vgg'
+  momentum:
+    value: 0.9
+  num_epochs:
+    value: 164
+  seed:
+    values:
+    - 3
+    - 4
+    - 5
+  use_wandb:
+    value: true
+  weight_decay:
+    value: 0.0001
+  mask_epoch:
+    value: 5
+  mask_sparsity:
+    values: [0.0001, 0.001, 0.01, 0.05, 0.1]
+  random_mask:
+    values: [false, true]
+program: spectral_dynamics/image_classification/run.py
+project: spectral_dynamics

@@ -1,0 +1,30 @@
+program: spectral_dynamics/modular_addition/run.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+method: grid
+project: lmc_svd
+name: modadd_tfmr_113_nolayernorm_nowd_frac0.9
+metric:
+  name: val/loss
+  goal: minimize
+parameters:
+  seed:
+    values: [0, 1, 2]
+  num_epochs:
+    value: 40000
+  num_gpus:
+    value: 1
+  batch_size:
+    value: 16384  # ~12k total examples, so full batch
+  use_wandb:
+    value: true
+  lr:
+    value: 1e-3
+  weight_decay:
+    value: 0.0
+  remove_layernorm:
+    value: true
+  data_frac:
+    value: 0.9

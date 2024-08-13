@@ -1,0 +1,40 @@
+program: spectral_dynamics/language_modeling/run.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+method: grid
+project: lmc_svd
+name: language_tfmr_wikitext_wd
+metric:
+  name: val/loss
+  goal: minimize
+parameters:
+  dataset:
+    value: 'wikitext103'
+  precision:
+    value: 16  # for faster training
+  seed:
+    values: [0, 1, 2]
+  num_epochs:
+    value: 10
+  chunk_size:
+    value: 2048
+  num_gpus:
+    value: 1
+  batch_size:
+    value: 4
+  accumulate_grad_batches:
+    value: 64
+  use_wandb:
+    value: true
+  lr:
+    value: 6e-4
+  weight_decay:
+    values: [0.0, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0]
+  gradient_clip_val:
+    value: 1.0
+  lr_schedule:
+    value: 'warmup_cosine'
+  warmup_steps:
+    value: 200  # roughly 1 epoch warmup as there are 57000 examples / bsz 256

@@ -1,0 +1,26 @@
+program: spectral_dynamics/speech_recognition/run.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+method: grid
+project: lmc_svd
+name: speech_lstm_libri_wd
+metric:
+  name: val/loss
+  goal: minimize
+parameters:
+  seed:
+    values: [0, 1, 2]
+  bidirectional:
+    value: true
+  batch_size:
+    value: 32
+  use_wandb:
+    value: true
+  lr:
+    value: 3e-4
+  weight_decay:
+    values: [0.0, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0]
+  num_epochs:
+    value: 50

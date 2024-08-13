@@ -1,0 +1,34 @@
+program: spectral_dynamics/image_classification/run.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+method: grid
+project: spectral_dynamics
+name: imgclass_vgg_cifar10
+metric:
+  name: val/loss
+  goal: minimize
+parameters:
+  seed:
+    values: [0, 1, 2]
+  dataset:
+    value: 'cifar10'
+  model_arch:
+    value: 'vgg'
+  batch_size:
+    value: 128
+  use_wandb:
+    value: true
+  lr:
+    value: 0.1
+  lr_schedule:
+    value: 'step'
+  weight_decay:
+    value: 0.0001
+  momentum:
+    value: 0.9
+  num_epochs:
+    value: 164
+  he_augs:
+    value: false

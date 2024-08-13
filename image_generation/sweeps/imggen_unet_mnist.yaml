@@ -1,0 +1,28 @@
+program: spectral_dynamics/image_generation/run.py
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+method: grid
+project: lmc_svd
+name: imggen_unet_mnist
+metric:
+  name: val/loss
+  goal: minimize
+parameters:
+  seed:
+    values: [0, 1, 2]
+  use_wandb:
+    value: true
+  model_arch:
+    value: 'unet'
+  batch_size:
+    value: 128
+  lr:
+    value: 3e-4
+  weight_decay:
+    value: 0.0
+  num_epochs:
+    value: 100
+  timesteps:
+    value: 1000
